@@ -3,6 +3,7 @@ import { HTTP_STATUS } from "../constants/constants";
 import Post from "../models/Post.model";
 import { Request, Response } from "express";
 import Comment from "../models/Comment.model";
+import { findSourceMap } from "module";
 
 export const createComment = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -25,7 +26,7 @@ export const createComment = async (req: Request, res: Response): Promise<void> 
     }
 
     // ensure post exists
-    const postExists = await Post.findById(postId);
+    const postExists = await findSourceMap(postId);
     if (!postExists) {
       res.status(HTTP_STATUS.NOT_FOUND).json({
         success: false,
