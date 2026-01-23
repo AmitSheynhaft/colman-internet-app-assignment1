@@ -21,6 +21,28 @@ export const getAllPosts = async (req: Request, res: Response): Promise<void> =>
   }
 };
 
+export const getPostsBySender = async (req: Request, res: Response): Promise<void> => {
+  try {
+    // senderId is guaranteed to exist because the router checks for it before calling this function
+    const { senderId } = req.query;
+
+    const posts = await Post.find({ "sender.id": Number(senderId) });
+
+    res.status(HTTP_STATUS.OK).json({
+      success: true,
+      message: `Posts by sender ${senderId} retrieved successfully`,
+      data: posts,
+    });
+  } catch (error: any) {
+    console.error("Error retrieving posts by sender:", error);
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+
 export const getPostById = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;

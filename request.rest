@@ -31,6 +31,38 @@ GET http://localhost:3000/api/posts
 # }
 
 ########################################
+# GET API - GET POSTS BY SENDER
+########################################
+
+GET http://localhost:3000/api/posts?senderId=<senderId>
+
+### Get Posts by Sender
+# Method: GET
+# URL: /api/posts?senderId=<sender_id>
+# Description: Retrieves all posts published by a specific sender, identified by sender ID
+# 
+# Expected Response: 200 OK
+# Response Format:
+# {
+#   "success": true,
+#   "message": "Posts by sender 123 retrieved successfully",
+#   "data": [
+#     {
+#       "_id": "string",
+#       "title": "string",
+#       "content": "string",
+#       "sender": {
+#           "id": 123,
+#           "name": "string"
+#       },
+#       "createdAt": "ISO date string",
+#       "updatedAt": "ISO date string"
+#     },
+#     ...
+#   ]
+# }
+
+########################################
 # GET API - GET POST BY ID
 ########################################
 
