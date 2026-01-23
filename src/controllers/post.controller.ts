@@ -74,7 +74,14 @@ export const getPostById = async (req: Request, res: Response): Promise<void> =>
 
 export const createPost = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { title, content, sender } = req.body;
+    const { title, content, sender } = req.body as {
+      title: string;
+      content: string;
+      sender: {
+        id: number;
+        name: string;
+      };
+    };
 
     if (!title || !content || !sender || !sender.id || !sender.name) {
       res.status(HTTP_STATUS.BAD_REQUEST).json({
@@ -122,18 +129,29 @@ export const createPost = async (req: Request, res: Response): Promise<void> => 
 export const updatePost = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
-    const { title, content, sender } = req.body;
+    const { title, content, sender } = req.body as Partial<{
+      title: string;
+      content: string;
+      sender: {
+        id: number;
+        name: string;
+      };
+    }>;
 
     // Build update object with only provided fields
-    const updateData: any = {};
+    const updateData: Partial<{ 
+      title: string; 
+      content: string; 
+      "sender.id": number; 
+      "sender.name": string;
+    }> = {};
     
     if (title !== undefined) updateData.title = title;
     if (content !== undefined) updateData.content = content;
     if (sender !== undefined) {
-      updateData.sender = {
-        id: sender.id,
-        name: sender.name,
-      };
+      // Allow partial sender updates
+      if (sender.id !== undefined) updateData["sender.id"] = sender.id;
+      if (sender.name !== undefined) updateData["sender.name"] = sender.name;
     }
 
     // Check if there's at least one field to update
