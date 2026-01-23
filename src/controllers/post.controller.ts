@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Post from "../models/Post.model";
 import { HTTP_STATUS } from "../constants/constants";
+import { findPostById } from "./shared/functions";
 
 export const getAllPosts = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -47,7 +48,7 @@ export const getPostById = async (req: Request, res: Response): Promise<void> =>
   try {
     const { id } = req.params;
 
-    const post = await Post.findById(id);
+    const post = await findPostById(id)
 
     if (!post) {
       res.status(HTTP_STATUS.NOT_FOUND).json({

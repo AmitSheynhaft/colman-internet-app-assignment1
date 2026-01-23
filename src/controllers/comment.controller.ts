@@ -24,7 +24,7 @@ export const createComment = async (req: Request, res: Response): Promise<void> 
       return;
     }
 
-    // ensure post exists (recommended)
+    // ensure post exists
     const postExists = await Post.findById(postId);
     if (!postExists) {
       res.status(HTTP_STATUS.NOT_FOUND).json({
