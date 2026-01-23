@@ -1,0 +1,31 @@
+########################################
+# POST API - CREATE NEW POST
+########################################
+
+### Create a New Post - Valid Request
+# Method: POST
+# URL: /api/posts
+# Content-Type: application/json
+# Description: Creates a new post in the database with title, content, and sender
+# 
+# Request Body Format:
+# {
+#   "title": string (required, 3-200 characters)
+#   "content": string (required, minimum 10 characters)
+#   "sender": string (required, not empty)
+# }
+# 
+# Expected Response: 200 Created
+# Response Format:
+# {
+#   "success": true,
+#   "message": "Post created successfully",
+#   "data": {
+#     "_id": "string",
+#     "title": "string",
+#     "content": "string",
+#     "sender": "string",
+#     "createdAt": "ISO date string",
+#     "updatedAt": "ISO date string"
+#   }
+# }
