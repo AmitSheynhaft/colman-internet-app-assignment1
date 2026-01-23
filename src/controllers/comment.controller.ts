@@ -8,7 +8,7 @@ export const createComment = async (req: Request, res: Response): Promise<void> 
   try {
     const { postId, content, creatorId } = req.body;
 
-    if (!postId || !content || !creatorId || !creatorId.id || !creatorId.name) {
+    if (!postId || !content || !creatorId ) {
       res.status(HTTP_STATUS.BAD_REQUEST).json({
         success: false,
         message: "Missing required fields: postId, content, creatorId are required",
