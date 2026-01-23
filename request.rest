@@ -31,6 +31,42 @@ GET http://localhost:3000/api/posts
 # }
 
 ########################################
+# GET API - GET POST BY ID
+########################################
+
+GET http://localhost:3000/api/posts/679272e5f4a6e8b001234567
+
+### Get Post by ID
+# Method: GET
+# URL: /api/posts/:id
+# Description: Retrieves a single post by its ID
+# 
+# Expected Response: 200 OK
+# Response Format:
+# {
+#   "success": true,
+#   "message": "Post retrieved successfully",
+#   "data": {
+#     "_id": "string",
+#     "title": "string",
+#     "content": "string",
+#     "sender": {
+#       "id": number,
+#       "name": "string"
+#     },
+#     "createdAt": "ISO date string",
+#     "updatedAt": "ISO date string"
+#   }
+# }
+# 
+# Expected Response (Not Found): 404 Not Found
+# Response Format:
+# {
+#   "success": false,
+#   "message": "Post not found"
+# }
+
+########################################
 # POST API - CREATE NEW POST
 ########################################
 
