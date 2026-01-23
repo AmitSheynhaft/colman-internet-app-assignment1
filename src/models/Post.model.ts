@@ -1,12 +1,5 @@
-import mongoose, { Document, Schema } from "mongoose";
-
-export interface IPost extends Document {
-  title: string;
-  content: string;
-  sender: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+import mongoose, { Schema } from "mongoose";
+import { IPost } from "../constants/constants";
 
 const postSchema = new Schema<IPost>(
   {
@@ -24,9 +17,18 @@ const postSchema = new Schema<IPost>(
       minlength: [10, "Content must be at least 10 characters"],
     },
     sender: {
-      type: String,
+      type: {
+        id: {
+          type: Number,
+          required: [true, "Sender ID is required"],
+        },
+        name: {
+          type: String,
+          required: [true, "Sender name is required"],
+          trim: true,
+        },
+      },
       required: [true, "Sender is required"],
-      trim: true,
     },
   },
   {

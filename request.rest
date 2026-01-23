@@ -12,7 +12,10 @@
 # {
 #   "title": string (required, 3-200 characters)
 #   "content": string (required, minimum 10 characters)
-#   "sender": string (required, not empty)
+#   "sender": {
+#     "id": number (required)
+#     "name": string (required, not empty)
+#   }
 # }
 # 
 # Expected Response: 200 Created
@@ -24,7 +27,10 @@
 #     "_id": "string",
 #     "title": "string",
 #     "content": "string",
-#     "sender": "string",
+#     "sender": {
+#       "id": "string",
+#       "name": "string"
+#     },
 #     "createdAt": "ISO date string",
 #     "updatedAt": "ISO date string"
 #   }
