@@ -2,6 +2,8 @@
 # GET API - GET ALL POSTS
 ########################################
 
+GET http://localhost:3000/api/posts
+
 ### Get All Posts
 # Method: GET
 # URL: /api/posts
@@ -28,11 +30,12 @@
 #   ]
 # }
 
-GET http://localhost:3000/api/posts
-
 ########################################
 # POST API - CREATE NEW POST
 ########################################
+
+POST http://localhost:3000/api/posts
+Content-Type: application/json
 
 ### Create a New Post - Valid Request
 # Method: POST
@@ -67,15 +70,3 @@ GET http://localhost:3000/api/posts
 #     "updatedAt": "ISO date string"
 #   }
 # }
-
-POST http://localhost:3000/api/posts
-Content-Type: application/json
-
-{
-  "title": "My First Post",
-  "content": "This is the content of my first post. It needs to be at least 10 characters long.",
-  "sender": {
-    "id": 123,
-    "name": "John Doe"
-  }
-}
