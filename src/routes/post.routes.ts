@@ -1,7 +1,10 @@
 import { Router } from "express";
-import { createPost } from "../controllers/post.controller";
+import { getAllPosts, createPost } from "../controllers/post.controller";
 
 const router = Router();
+
+// GET /api/posts - Get all posts
+router.get("/", getAllPosts);
 
 // POST /api/posts - Create a new post
 router.post("/", createPost);

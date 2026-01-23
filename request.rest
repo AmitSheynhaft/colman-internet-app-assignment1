@@ -1,4 +1,36 @@
 ########################################
+# GET API - GET ALL POSTS
+########################################
+
+### Get All Posts
+# Method: GET
+# URL: /api/posts
+# Description: Retrieves all posts from the database as a JSON array
+# 
+# Expected Response: 200 OK
+# Response Format:
+# {
+#   "success": true,
+#   "message": "Posts retrieved successfully",
+#   "data": [
+#     {
+#       "_id": "string",
+#       "title": "string",
+#       "content": "string",
+#       "sender": {
+#           "id": number,
+#           "name": "string"
+#       },
+#       "createdAt": "ISO date string",
+#       "updatedAt": "ISO date string"
+#     },
+#     ...
+#   ]
+# }
+
+GET http://localhost:3000/api/posts
+
+########################################
 # POST API - CREATE NEW POST
 ########################################
 
@@ -28,10 +60,22 @@
 #     "title": "string",
 #     "content": "string",
 #     "sender": {
-#       "id": "string",
+#       "id": number,
 #       "name": "string"
 #     },
 #     "createdAt": "ISO date string",
 #     "updatedAt": "ISO date string"
 #   }
 # }
+
+POST http://localhost:3000/api/posts
+Content-Type: application/json
+
+{
+  "title": "My First Post",
+  "content": "This is the content of my first post. It needs to be at least 10 characters long.",
+  "sender": {
+    "id": 123,
+    "name": "John Doe"
+  }
+}
