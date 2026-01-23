@@ -1,6 +1,7 @@
 import express, { Application } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
 import routes from "./routes";
 import { errorHandler } from "./middleware/errorHandler";
 import connectDB from "./config/database";
@@ -21,6 +22,57 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api", routes);
+
+// Root endpoint - shows server and MongoDB status
+app.get("/", (req, res) => {
+  const dbStatus = mongoose.connection.readyState === 1 ? "Connected" : "Disconnected";
+  res.send(`
+    <html>
+      <head>
+        <title>Server Status</title>
+        <style>
+          body { 
+            font-family: Arial, sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          }
+          .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            text-align: center;
+          }
+          h1 { color: #333; margin-bottom: 20px; }
+          .status { 
+            font-size: 20px; 
+            margin: 15px 0; 
+            padding: 10px;
+            border-radius: 5px;
+          }
+          .running { background: #d4edda; color: #155724; }
+          .connected { background: #d1ecf1; color: #0c5460; }
+          .disconnected { background: #f8d7da; color: #721c24; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <h1>🚀 Server Status</h1>
+          <div class="status running">
+            ✅ Server is running on port ${PORT}
+          </div>
+          <div class="status ${dbStatus === 'Connected' ? 'connected' : 'disconnected'}">
+            ${dbStatus === 'Connected' ? '✅' : '❌'} MongoDB: ${dbStatus}
+          </div>
+        </div>
+      </body>
+    </html>
+  `);
+});
 
 // Health check endpoint
 app.get("/health", (req, res) => {
