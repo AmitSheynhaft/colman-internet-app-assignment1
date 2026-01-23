@@ -6,14 +6,14 @@ export const getAllPosts = async (req: Request, res: Response): Promise<void> =>
   try {
     const posts = await Post.find();
 
-    res.status(200).json({
+    res.status(HTTP_STATUS.OK).json({
       success: true,
       message: "Posts retrieved successfully",
       data: posts,
     });
   } catch (error: any) {
     console.error("Error retrieving posts:", error);
-    res.status(500).json({
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
       success: false,
       message: "Internal server error",
       error: error.message,
