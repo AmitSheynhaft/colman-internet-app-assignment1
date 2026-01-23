@@ -2,6 +2,25 @@ import { Request, Response } from "express";
 import Post from "../models/Post.model";
 import { HTTP_STATUS } from "../constants/constants";
 
+export const getAllPosts = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const posts = await Post.find();
+
+    res.status(HTTP_STATUS.OK).json({
+      success: true,
+      message: "Posts retrieved successfully",
+      data: posts,
+    });
+  } catch (error: any) {
+    console.error("Error retrieving posts:", error);
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+
 export const createPost = async (req: Request, res: Response): Promise<void> => {
   try {
     const { title, content, sender } = req.body;
