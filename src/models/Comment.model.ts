@@ -19,12 +19,12 @@ const CommentSchema: Schema = new Schema(
       minlength: [1, "content must be at least 1 character"],
       maxlength: [500, "content cannot exceed 500 characters"],
     },
-    post: {
+    postId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Post",
-      required: [true, "post is required"],
+      required: [true, "post id is required"],
     },
-    creator: {
+    creatorId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: [true, "user is required"],
@@ -32,4 +32,6 @@ const CommentSchema: Schema = new Schema(
   },
   { timestamps: true });
 
-export default mongoose.model<IComment>("Comment", CommentSchema);
+  const Comment = mongoose.model<IComment>("Comment", CommentSchema);
+
+export default Comment;
