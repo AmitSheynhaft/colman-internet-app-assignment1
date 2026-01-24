@@ -196,3 +196,246 @@ Content-Type: application/json
     "name": "John Doe"
   }
 }
+
+########################################
+# GET API - GET ALL COMMENTS
+########################################
+
+GET http://localhost:3000/api/comments
+
+### Get All Comments
+# Method: GET
+# URL: /api/comments
+# Description: Retrieves all comments from the database as a JSON array
+#
+# Expected Response: 200 OK
+# Response Format:
+# {
+#   "success": true,
+#   "message": "Comments retrieved successfully",
+#   "data": [
+#     {
+#       "_id": "string",
+#       "content": "string",
+#       "postId": "string",
+#       "sender": {
+#         "id": number,
+#         "name": "string"
+#       },
+#       "createdAt": "ISO date string",
+#       "updatedAt": "ISO date string"
+#     },
+#     ...
+#   ]
+# }
+
+########################################
+# GET API - GET COMMENT BY ID
+########################################
+
+GET http://localhost:3000/api/comments/6974be3d4c2c3604eddc54c1
+
+### Get Comment by ID
+# Method: GET
+# URL: /api/comments/:id
+# Description: Retrieves a single comment by its ID
+#
+# Expected Response: 200 OK
+# Response Format:
+# {
+#   "success": true,
+#   "message": "Comment retrieved successfully",
+#   "data": {
+#     "_id": "string",
+#     "content": "string",
+#     "postId": "string",
+#     "sender": {
+#       "id": number,
+#       "name": "string"
+#     },
+#     "createdAt": "ISO date string",
+#     "updatedAt": "ISO date string"
+#   }
+# }
+#
+# Expected Response (Not Found): 404 Not Found
+# Response Format:
+# {
+#   "success": false,
+#   "message": "Comment not found"
+# }
+
+########################################
+# GET API - GET COMMENTS BY POST ID
+########################################
+
+GET http://localhost:3000/api/comments/post/6974bdd74c2c3604eddc54bd
+
+### Get Comments by Post ID
+# Method: GET
+# URL: /api/comments/post/:postId
+# Description: Retrieves all comments associated with a specific post
+#
+# Expected Response: 200 OK
+# Response Format:
+# {
+#   "success": true,
+#   "message": "Comments for post 6974bdd74c2c3604eddc54bd retrieved successfully",
+#   "data": [
+#     {
+#       "_id": "string",
+#       "content": "string",
+#       "postId": "string",
+#       "sender": {
+#         "id": number,
+#         "name": "string"
+#       },
+#       "createdAt": "ISO date string",
+#       "updatedAt": "ISO date string"
+#     },
+#     ...
+#   ]
+# }
+
+########################################
+# POST API - CREATE NEW COMMENT
+########################################
+
+POST http://localhost:3000/api/comments
+Content-Type: application/json
+
+{
+  "postId": "6974bdd74c2c3604eddc54bd",
+  "content": "This is my first comment!",
+  "sender": {
+    "id": 1,
+    "name": "Hodaya"
+  }
+}
+
+### Create a New Comment - Valid Request
+# Method: POST
+# URL: /api/comments
+# Content-Type: application/json
+# Description: Creates a new comment in the database linked to a specific post
+#
+# Request Body Format:
+# {
+#   "postId": string (required - MongoDB ObjectId of an existing post)
+#   "content": string (required, 1-500 characters)
+#   "sender": {
+#     "id": number (required)
+#     "name": string (required, not empty)
+#   }
+# }
+#
+# Expected Response: 200 OK
+# Response Format:
+# {
+#   "success": true,
+#   "message": "Comment created successfully",
+#   "data": {
+#     "_id": "string",
+#     "content": "string",
+#     "postId": "string",
+#     "sender": {
+#       "id": number,
+#       "name": "string"
+#     },
+#     "createdAt": "ISO date string",
+#     "updatedAt": "ISO date string"
+#   }
+# }
+
+########################################
+# PUT API - UPDATE COMMENT
+########################################
+
+PUT http://localhost:3000/api/comments/6974be664c2c3604eddc54c5
+Content-Type: application/json
+
+{
+  "postId": "6974bdd74c2c3604eddc54bd",
+  "content": "Updated comment content!",
+  "sender": {
+    "id": 1,
+    "name": "Hodaya"
+  }
+}
+
+### Update Comment
+# Method: PUT
+# URL: /api/comments/:id
+# Content-Type: application/json
+# Description: Updates an existing comment by its ID (replaces its content and sender)
+#
+# Request Body Format:
+# {
+#   "postId": string (required)
+#   "content": string (required, 1-500 characters)
+#   "sender": {
+#     "id": number (required)
+#     "name": string (required)
+#   }
+# }
+#
+# Expected Response: 200 OK
+# Response Format:
+# {
+#   "success": true,
+#   "message": "Comment updated successfully",
+#   "data": {
+#     "_id": "string",
+#     "content": "string",
+#     "postId": "string",
+#     "sender": {
+#       "id": number,
+#       "name": "string"
+#     },
+#     "createdAt": "ISO date string",
+#     "updatedAt": "ISO date string"
+#   }
+# }
+#
+# Expected Response (Not Found): 404 Not Found
+# Response Format:
+# {
+#   "success": false,
+#   "message": "Comment not found"
+# }
+
+########################################
+# DELETE API - DELETE COMMENT
+########################################
+
+DELETE http://localhost:3000/api/comments/6974be664c2c3604eddc54c5
+
+### Delete Comment
+# Method: DELETE
+# URL: /api/comments/:id
+# Description: Deletes a comment by its ID
+#
+# Expected Response: 200 OK
+# Response Format:
+# {
+#   "success": true,
+#   "message": "Comment deleted successfully",
+#   "data": {
+#     "_id": "string",
+#     "content": "string",
+#     "postId": "string",
+#     "sender": {
+#       "id": number,
+#       "name": "string"
+#     },
+#     "createdAt": "ISO date string",
+#     "updatedAt": "ISO date string"
+#   }
+# }
+#
+# Expected Response (Not Found): 404 Not Found
+# Response Format:
+# {
+#   "success": false,
+#   "message": "Comment not found"
+# }
