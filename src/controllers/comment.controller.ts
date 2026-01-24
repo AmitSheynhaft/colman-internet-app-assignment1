@@ -65,3 +65,22 @@ export const createComment = async (req: Request, res: Response): Promise<void> 
     });
   }
 };
+
+export const getAllComments = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const comments = await Comment.find();
+
+    res.status(HTTP_STATUS.OK).json({
+      success: true,
+      message: "Comments retrieved successfully",
+      data: comments,
+    });
+  } catch (error: any) {
+    console.error("Error retrieving comments:", error);
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
