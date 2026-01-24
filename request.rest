@@ -233,7 +233,7 @@ GET http://localhost:3000/api/comments
 # GET API - GET COMMENT BY ID
 ########################################
 
-GET http://localhost:3000/api/comments/6974be664c2c3604eddc54c5
+GET http://localhost:3000/api/comments/6974be3d4c2c3604eddc54c1
 
 ### Get Comment by ID
 # Method: GET
