@@ -3,9 +3,10 @@ import mongoose, { Schema, Document } from "mongoose";
 export interface IComment extends Document {
   content: string;
   postId: mongoose.Types.ObjectId;
-  creatorId: mongoose.Types.ObjectId;
-  createdAt: Date;
-  updatedAt: Date;
+  sender: {
+    id: number;
+    name: string;
+  };
 }
 
 const CommentSchema: Schema = new Schema(
@@ -21,10 +22,19 @@ const CommentSchema: Schema = new Schema(
       ref: "Post",
       required: [true, "post id is required"],
     },
-    creatorId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: [true, "creator id is required"],
+    sender: {
+      type: {
+        id: {
+          type: Number,
+          required: [true, "Sender ID is required"],
+        },
+        name: {
+          type: String,
+          required: [true, "Sender name is required"],
+          trim: true,
+        },
+      },
+      required: [true, "Sender is required"],
     },
   },
   { timestamps: true });

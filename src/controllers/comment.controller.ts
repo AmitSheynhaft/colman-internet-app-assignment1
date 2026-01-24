@@ -6,12 +6,12 @@ import { findPostById } from "./shared/functions";
 
 export const createComment = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { postId, content, creatorId } = req.body;
+    const { postId, content, sender } = req.body;
 
-    if (!postId || !content || !creatorId ) {
+    if (!postId || !content || !sender || !sender.id || !sender.name) {
       res.status(HTTP_STATUS.BAD_REQUEST).json({
         success: false,
-        message: "Missing required fields: postId, content, creatorId are required",
+        message: "Missing required fields: postId, content, sender are required",
       });
       return;
     }
@@ -37,7 +37,7 @@ export const createComment = async (req: Request, res: Response): Promise<void> 
     const newComment = new Comment({
       postId,
       content,
-      creatorId,
+      sender,
     });
 
     const savedComment = await newComment.save();
