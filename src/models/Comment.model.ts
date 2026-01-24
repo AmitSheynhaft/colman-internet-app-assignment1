@@ -24,7 +24,7 @@ const CommentSchema: Schema = new Schema(
     creatorId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: [true, "user is required"],
+      required: [true, "creator id is required"],
     },
   },
   { timestamps: true });
