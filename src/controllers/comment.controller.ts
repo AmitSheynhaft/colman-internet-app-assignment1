@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { HTTP_STATUS } from "../constants/constants";
-import Post from "../models/Post.model";
 import { Request, Response } from "express";
 import Comment from "../models/Comment.model";
 import { findPostById } from "./shared/functions";
