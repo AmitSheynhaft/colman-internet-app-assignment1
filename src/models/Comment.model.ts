@@ -24,7 +24,7 @@ const CommentSchema: Schema = new Schema(
       ref: "Post",
       required: [true, "post id is required"],
     },
-    creatorId: {
+    creator: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: [true, "user is required"],
