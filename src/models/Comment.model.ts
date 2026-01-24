@@ -2,11 +2,8 @@ import mongoose, { Schema, Document } from "mongoose";
 
 export interface IComment extends Document {
   content: string;
-  post: mongoose.Types.ObjectId;
-  creator: {
-    id: number;
-    name: string;
-  };
+  postId: mongoose.Types.ObjectId;
+  creatorId: mongoose.Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -24,7 +21,7 @@ const CommentSchema: Schema = new Schema(
       ref: "Post",
       required: [true, "post id is required"],
     },
-    creator: {
+    creatorId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: [true, "user is required"],
