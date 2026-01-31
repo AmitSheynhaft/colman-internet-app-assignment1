@@ -1,0 +1,92 @@
+### Create a New Post
+POST http://localhost:3000/api/posts
+Content-Type: application/json
+
+{
+  "title": "Test Post",
+  "content": "This is a test post content with enough characters to meet the minimum requirement.",
+  "sender": {
+    "id": 123,
+    "name": "John Doe"
+  }
+}
+
+###
+
+### Get All Posts
+GET http://localhost:3000/api/posts
+
+###
+
+### Get Post by ID
+GET http://localhost:3000/api/posts/69738d2fc742184ae8b302a5
+
+###
+
+### Get Posts by Sender
+GET http://localhost:3000/api/posts?senderId=123
+
+###
+
+### Update a Post
+PUT http://localhost:3000/api/posts/697dce5a70a3a6007f1ae136
+Content-Type: application/json
+
+{
+  "title": "Updated Post Title",
+  "content": "This is the updated content of the post. It has been modified with new information.",
+  "sender": {
+    "id": 123,
+    "name": "John Doe"
+  }
+}
+
+###
+
+### Create a New Comment
+POST http://localhost:3000/api/comments
+Content-Type: application/json
+
+{
+  "postId": "697dce5a70a3a6007f1ae136",
+  "content": "This is my first comment!",
+  "sender": {
+    "id": 1,
+    "name": "Hodaya"
+  }
+}
+
+###
+
+### Get All Comments
+GET http://localhost:3000/api/comments
+
+###
+
+### Get Comment by ID
+GET http://localhost:3000/api/comments/697dd2d499adf21625874ec4
+
+###
+
+### Get Comments by Post ID
+GET http://localhost:3000/api/comments/post/697dce5a70a3a6007f1ae136
+
+###
+
+### Update Comment
+PUT http://localhost:3000/api/comments/697dd2d499adf21625874ec4
+Content-Type: application/json
+
+{
+  "postId": "6974bdd74c2c3604eddc54bd",
+  "content": "Updated comment content!",
+  "sender": {
+    "id": 1,
+    "name": "Hodaya"
+  }
+}
+
+###
+
+### Delete Comment
+DELETE http://localhost:3000/api/comments/697dd2d499adf21625874ec4
